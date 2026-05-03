@@ -75,7 +75,7 @@ less input → less preprocessing cost → similar downstream behavior
 
 We apply filtering before feature construction, closer to the intended pre-oracle stage.
 
-![Vectorization time](../figures/figure_06b_wrapper_vectorize_time.svg)
+![Vectorization time](../figures/figure_06b_wrapper_vectorize_time.png)
 
 Vectorization time decreases as input size is reduced, demonstrating reduced preprocessing cost.
 
@@ -83,7 +83,7 @@ Vectorization time decreases as input size is reduced, demonstrating reduced pre
 
 ### 3.2 Downstream Stability
 
-![Balanced accuracy](../figures/figure_06c_wrapper_balanced_accuracy.svg)
+![Balanced accuracy](../figures/figure_06c_wrapper_balanced_accuracy.png)
 
 Balanced accuracy remains stable across filtering levels, indicating that input reduction does not degrade downstream behavior.
 
@@ -93,7 +93,7 @@ Balanced accuracy remains stable across filtering levels, indicating that input 
 
 We compare wheel filtering with random subsampling at matched retained fractions.
 
-![Wheel vs random](../figures/figure_05a_balanced_accuracy_wheel_vs_random.svg)
+![Wheel vs random](../figures/figure_05a_balanced_accuracy_wheel_vs_random.png)
 
 Wheel-filtered performance lies within the distribution of random subsets, showing that it behaves like a deterministic version of random reduction.
 
@@ -103,7 +103,7 @@ Wheel-filtered performance lies within the distribution of random subsets, showi
 
 We test robustness by permuting dataset rows before filtering.
 
-![Ordering robustness](../figures/figure_07b_row_order_balanced_accuracy_delta.svg)
+![Ordering robustness](../figures/figure_07b_row_order_balanced_accuracy_delta.png)
 
 Differences remain small, indicating results are not driven by row-order artifacts.
 
