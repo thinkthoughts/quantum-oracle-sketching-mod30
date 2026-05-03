@@ -216,3 +216,14 @@ Includes:
 
 ---
 
+## Paper
+
+Full write-up of the modwheel pre-oracle filtering layer:
+
+👉 [paper/paper.pdf](paper/paper.pdf)
+
+Highlights:
+- ~73–79% candidate reduction before oracle construction  
+- non-invasive row-ID adapter (no QOS modifications)  
+- real-dataset validation (20newsgroups)  
+- classical filtering → reduced input stream → downstream QOS / ML workflow  
