@@ -213,6 +213,16 @@ Includes:
 - Notebook 02 — synthetic row-ID adapter  
 - Notebook 03 — 20news real dataset adapter  
 - Notebook 04 — consolidated paper figure pack  
+- Notebook 05 — comparison with random subsampling  
+- Notebook 06 — QOS-style wrapper (pre-feature filtering)  
+- Notebook 07 — row-order robustness  
+
+Together these show:
+
+- ~73–79% candidate reduction  
+- behavior comparable to random subsampling  
+- reduced preprocessing cost (TF-IDF, etc.)  
+- stability under dataset reordering  
 
 ---
 
@@ -223,7 +233,13 @@ Full write-up of the modwheel pre-oracle filtering layer:
 👉 [paper/paper.pdf](paper/paper.pdf)
 
 Highlights:
+
 - ~73–79% candidate reduction before oracle construction  
-- non-invasive row-ID adapter (no QOS modifications)  
-- real-dataset validation (20newsgroups)  
-- classical filtering → reduced input stream → downstream QOS / ML workflow  
+- deterministic alternative to random subsampling  
+- reduced preprocessing cost in QOS-style wrapper experiments  
+- robustness to dataset ordering  
+- non-invasive integration (no QOS modifications)  
+
+This work positions modwheel filtering as a:
+
+> deterministic front-end layer for reducing classical input in QOS-style pipelines
