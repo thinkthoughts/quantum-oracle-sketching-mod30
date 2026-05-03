@@ -3,6 +3,9 @@ Compare mod30, mod210, and mod2310 as pre-oracle wheel filters.
 
 Run:
     python compare_wheels.py
+    
+# Added in this fork:
+# compares classical filtering strength before oracle stage
 """
 
 from __future__ import annotations
