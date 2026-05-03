@@ -6,6 +6,9 @@ after mod30, mod210, and mod2310 filtering.
 
 Run:
     python benchmark_modwheel.py --n 100000
+
+# Interpretation:
+# filtered candidates approximate oracle inputs
 """
 
 from __future__ import annotations
