@@ -192,7 +192,27 @@ The idea:
 
 Pipeline:
 
+```text
 raw classical data
 → wheel filter (this fork)
 → QOS sampling / sketching
 → quantum oracle
+```
+
+---
+
+## Notebooks
+
+For full experiments, figures, and paper-ready results, see:
+
+👉 [notebooks/README.md](notebooks/modwheel_notebooks_overview.md)
+
+Includes:
+
+- Notebook 01 — wheel density and tradeoff  
+- Notebook 02 — synthetic row-ID adapter  
+- Notebook 03 — 20news real dataset adapter  
+- Notebook 04 — consolidated paper figure pack  
+
+---
+
