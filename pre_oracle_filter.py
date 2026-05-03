@@ -1,16 +1,18 @@
 """
-pre_oracle_filter.py
+Optional classical filtering layer before QOS.
 
-Optional classical filtering layer before quantum oracle sketching.
+Intended integration:
 
-The intended integration point is:
+raw classical data
+→ pre_oracle_candidates(...)
+→ qos.py / qos_sampling.py
+→ oracle construction
 
-    raw classical stream
-        -> pre_oracle_candidates(...)
-        -> QOS oracle/sketch construction
-        -> downstream QSVT / ML task
+Purpose:
+- reduce candidate stream size
+- introduce a classical vs oracle cost tradeoff
 
-This file does not modify qos.py, qos_sampling.py, or qsvt.py.
+This layer is independent and does not alter QOS internals.
 """
 
 from __future__ import annotations
