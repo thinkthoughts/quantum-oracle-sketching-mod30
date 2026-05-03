@@ -68,6 +68,19 @@ Includes:
 
 ---
 
+## Paper
+
+A short paper describing the wheel-based pre-oracle filtering layer:
+
+👉 [paper/paper.pdf](paper/paper.pdf)
+
+Includes:
+- modular wheel filtering (mod30, mod210, mod2310)
+- row-ID adapter design
+- synthetic and 20news experiments
+- candidate reduction (~73–79%) with stable downstream behavior
+---
+
 ## Summary
 
 Across mod30, mod210, and mod2310:
