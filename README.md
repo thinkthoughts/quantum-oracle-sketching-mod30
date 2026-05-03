@@ -182,3 +182,17 @@ If you find this repository useful, please consider citing our paper.
     year={2026}
 }
 ```
+## Optional: Wheel-Based Pre-Oracle Filtering
+
+This fork adds a classical pre-processing layer before quantum oracle sketching.
+
+The idea:
+- apply modular “wheel” filters (mod30, mod210, mod2310)
+- reduce candidate stream before oracle construction
+
+Pipeline:
+
+raw classical data
+→ wheel filter (this fork)
+→ QOS sampling / sketching
+→ quantum oracle
