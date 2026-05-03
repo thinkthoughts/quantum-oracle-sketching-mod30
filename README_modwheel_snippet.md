@@ -55,13 +55,11 @@ Key observation:
 
 ## Notebooks
 
-For full experiments, figures, and paper-ready results:
+For full experiments, figures, and paper-ready results, see:
 
-```text
-notebooks/README.md
-```
+👉 [notebooks/README.md](notebooks/modwheel_notebooks_overview.md)
 
-Notebook sequence:
+Includes:
 
 - Notebook 01 — wheel density and tradeoff  
 - Notebook 02 — synthetic row-ID adapter  
