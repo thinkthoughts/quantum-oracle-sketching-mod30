@@ -3,6 +3,8 @@ pytest tests for wheel-based pre-oracle filtering.
 
 Run:
     pytest test_modwheel.py
+
+# Tests validate mathematical correctness of wheel filtering.
 """
 
 from modwheel import STANDARD_WHEELS, make_wheel
