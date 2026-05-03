@@ -11,6 +11,12 @@ Examples:
     mod30   = primes [2, 3, 5]       -> 8 / 30 candidates
     mod210  = primes [2, 3, 5, 7]    -> 48 / 210 candidates
     mod2310 = primes [2, 3, 5, 7, 11]-> 480 / 2310 candidates
+
+Added in this fork:
+- used as an optional classical pre-oracle filter
+- reduces candidate stream before QOS oracle construction
+
+Does not modify core QOS algorithms.
 """
 
 from __future__ import annotations
