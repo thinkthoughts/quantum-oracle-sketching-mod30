@@ -33,4 +33,19 @@ pytest test_modwheel.py
 | mod30 | 2·3·5 | 8/30 | 0.2667 |
 | mod210 | 2·3·5·7 | 48/210 | 0.2286 |
 | mod2310 | 2·3·5·7·11 | 480/2310 | 0.2078 |
+
+---
+
+## Notebooks
+
+For full experiments, figures, and paper-ready results, see:
+
+```text
+notebooks/modwheel_notebooks_overview.md
 ```
+This includes:
+
+Notebook 01 — wheel density and tradeoff
+Notebook 02 — synthetic row-ID adapter
+Notebook 03 — 20news real dataset adapter
+Notebook 04 — consolidated paper figure pack
