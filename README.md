@@ -183,22 +183,63 @@ If you find this repository useful, please consider citing our paper.
     year={2026}
 }
 ```
-## Optional: Wheel-Based Pre-Oracle Filtering
+## Optional: Wheel-Based Pre-Oracle Filtering + Readout Policy
 
-This fork adds a classical pre-processing layer before quantum oracle sketching.
+This fork adds a classical preprocessing and inference-control layer around Quantum Oracle Sketching (QOS).
 
-The idea:
-- apply modular “wheel” filters (mod30, mod210, mod2310)
-- reduce candidate stream before oracle construction
+The additions are non-invasive and operate entirely outside the core QOS implementation.
 
-Pipeline:
+---
+
+## Pipeline
 
 ```text
 raw classical data
-→ wheel filter (this fork)
-→ QOS sampling / sketching
-→ quantum oracle
+    → wheel filter (mod30 / mod210 / mod2310)
+    → QOS sampling / sketching
+    → quantum oracle
+    → structured readout scheduling (this fork)
+    → controlled stopping / policy selection
 ```
+
+---
+
+## Part I — Pre-Oracle Filtering (Input Reduction)
+
+The wheel filter:
+
+- applies modular residue constraints (mod30, mod210, mod2310)  
+- reduces the candidate stream before oracle construction  
+- is deterministic (no sampling variance)  
+- does not modify QOS internals  
+
+Empirical results (Notebooks 01–07):
+
+- ~73–79% candidate reduction  
+- behavior comparable to random subsampling at equal size  
+- reduced preprocessing cost (e.g., TF-IDF pipelines)  
+- stable under dataset reordering  
+
+---
+
+## Part II — Readout Scheduling & Inference Control
+
+This fork also introduces a structured framework for evaluating many sparse test queries after model construction.
+
+Capabilities (Notebooks 08–13):
+
+- structured vs random readout scheduling  
+- early stopping based on target behavior  
+- confidence-aware query prioritization  
+- coverage-aware scheduling using modular lanes  
+- stopping policies requiring both:
+  - accuracy thresholds  
+  - coverage thresholds  
+- multi-objective policy selection via Pareto analysis  
+
+Key insight:
+
+Readout scheduling is a multi-objective problem involving tradeoffs between query cost, predictive behavior, and coverage.
 
 ---
 
@@ -206,41 +247,68 @@ raw classical data
 
 For full experiments, figures, and paper-ready results, see:
 
-👉 [notebooks/README.md](notebooks/modwheel_notebooks_overview.md)
+notebooks/modwheel_notebooks_overview.md
 
 Includes:
 
-- Notebook 01 — wheel density and tradeoff  
-- Notebook 02 — synthetic row-ID adapter  
-- Notebook 03 — 20news real dataset adapter  
-- Notebook 04 — consolidated paper figure pack  
-- Notebook 05 — comparison with random subsampling  
-- Notebook 06 — QOS-style wrapper (pre-feature filtering)  
-- Notebook 07 — row-order robustness  
+Part I — Pre-Oracle Filtering
+- Notebooks 01–07
 
-Together these show:
-
-- ~73–79% candidate reduction  
-- behavior comparable to random subsampling  
-- reduced preprocessing cost (TF-IDF, etc.)  
-- stability under dataset reordering  
+Part II — Readout Policy & Inference Control
+- Notebooks 08–13
 
 ---
 
 ## Paper
 
-Full write-up of the modwheel pre-oracle filtering layer:
+Full write-up of the pre-oracle filtering layer:
 
-👉 [paper/paper.pdf](paper/paper.pdf)
+paper/paper.pdf
 
 Highlights:
 
-- ~73–79% candidate reduction before oracle construction  
-- deterministic alternative to random subsampling  
-- reduced preprocessing cost in QOS-style wrapper experiments  
+- deterministic candidate reduction (~73–79%)  
+- equivalent behavior to random subsampling  
+- reduced preprocessing cost in QOS-style workflows  
 - robustness to dataset ordering  
-- non-invasive integration (no QOS modifications)  
+- non-invasive integration  
 
-This work positions modwheel filtering as a:
+Extended notebook results additionally introduce:
 
-> deterministic front-end layer for reducing classical input in QOS-style pipelines
+- structured readout scheduling  
+- coverage-constrained stopping policies  
+- multi-objective policy optimization  
+
+---
+
+## Summary
+
+This fork introduces two complementary layers around QOS:
+
+### Input-side (before oracle construction)
+
+deterministic filtering  
+    → reduced input stream  
+    → lower preprocessing cost  
+
+### Output-side (after model construction)
+
+structured readout scheduling  
+    → controlled evaluation of sparse queries  
+    → early stopping + coverage constraints  
+    → policy selection via optimization  
+
+---
+
+## Guardrail
+
+These additions:
+
+- evaluate classical preprocessing and inference behavior  
+- demonstrate QOS-compatible integration patterns  
+
+They do NOT claim:
+
+- quantum advantage  
+- improvements to QOS algorithms  
+- accuracy gains  
