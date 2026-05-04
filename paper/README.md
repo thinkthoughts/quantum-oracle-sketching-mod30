@@ -88,7 +88,7 @@ We control:
 
 ### Accuracy vs Coverage
 
-![Accuracy vs Coverage](notebooks/12_notebook_outputs/figure_12b_accuracy_vs_lane_coverage.png)
+![Accuracy vs Coverage](notebooks/12_notebook_outputs/figure_12b_accuracy_vs_lane_coverage.svg)
 
 Accuracy saturates before full coverage.
 
@@ -96,7 +96,7 @@ Accuracy saturates before full coverage.
 
 ### Hybrid Coverage
 
-![Lane Coverage](notebooks/11_notebook_outputs/figure_11c_lane_coverage.png)
+![Lane Coverage](notebooks/11_notebook_outputs/figure_11c_lane_coverage.svg)
 
 Hybrid scheduling preserves structured coverage.
 
@@ -104,7 +104,7 @@ Hybrid scheduling preserves structured coverage.
 
 ### Pareto Frontier
 
-![Pareto](notebooks/13_notebook_outputs/figure_13c_pareto_coverage_view.png)
+![Pareto](notebooks/13_notebook_outputs/figure_13c_pareto_coverage_view.svg)
 
 Tradeoffs between cost, accuracy, and coverage.
 
