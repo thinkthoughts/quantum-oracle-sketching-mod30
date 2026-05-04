@@ -1,4 +1,4 @@
-![modwheel banner](figures/modwheel_repo_banner.png)
+![modwheel banner](figures/mod30_banner.png)
 # Quantum Oracle Sketching (QOS)
 
 Code repository for our paper ["Exponential quantum advantage in processing massive classical data"](https://arxiv.org/abs/2604.07639).
