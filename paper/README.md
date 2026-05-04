@@ -1,43 +1,62 @@
 # Structured Readout Scheduling and Policy Design for Sparse Query Evaluation
 
+> Companion paper for notebooks 08–13 in this repository.
+
+---
+
 ## Abstract
 
-Evaluating large numbers of sparse test queries is a bottleneck in data-intensive and hybrid workflows. While prior work emphasizes input reduction and model construction, less attention has been given to how inference itself is structured.
+Evaluating large numbers of sparse test queries is a bottleneck in data-intensive and hybrid classical–quantum workflows. While prior work emphasizes input reduction and model construction, comparatively less attention has been given to how inference itself is structured.
 
-We introduce a framework for structured readout scheduling, coverage-aware inference, and multi-objective policy design. We show that predictive performance typically saturates before full coverage is achieved, that enforcing coverage constraints introduces a controllable evaluation cost, and that no single scheduling strategy dominates across all objectives. Pareto-efficient policies characterize optimal tradeoffs between query cost, predictive behavior, coverage, and distributional stability.
+We introduce a framework for **structured readout scheduling**, **coverage-aware inference**, and **multi-objective policy design**. We show that predictive performance can saturate before full coverage is achieved, that enforcing coverage constraints introduces a controllable evaluation cost, and that Pareto-efficient policies characterize tradeoffs between query cost, predictive behavior, coverage, and distributional stability.
 
 This work does not modify Quantum Oracle Sketching (QOS) or claim quantum advantage; it develops a classical inference-control layer compatible with QOS-style pipelines and other sparse evaluation settings.
 
 ---
 
+## Repository Context
+
+This paper corresponds to:
+
+```
+notebooks/
+  08_readout_scheduling_mod30.ipynb
+  09_early_stopping_readout.ipynb
+  10_confidence_readout_scheduling.ipynb
+  11_hybrid_modwheel_confidence_readout.ipynb
+  12_coverage_constrained_adaptive_readout.ipynb
+  13_multi_objective_readout_policy.ipynb
+```
+
+Outputs used below:
+
+```
+notebooks/11_notebook_outputs/
+notebooks/12_notebook_outputs/
+notebooks/13_notebook_outputs/
+```
+
+---
+
 ## 1. Introduction
 
-Many modern systems must evaluate large sets of candidate queries under limited computational budgets. This arises in machine learning inference, retrieval systems, and hybrid classical–quantum workflows such as QOS.
+Many modern computational systems must evaluate large sets of candidate queries under constrained resources.
 
-Most optimization effort has focused on:
-
-- reducing input size  
-- improving model construction  
-
-We instead focus on:
+We focus on:
 
 > how to evaluate many sparse queries efficiently and systematically.
 
-We propose that readout is not passive—it is a controllable component.
+Readout is treated as a **controllable component of inference**.
 
 ---
 
 ## 2. Problem Setting
 
-We consider:
+Pipeline:
 
-trained model → large query set → partial evaluation
-
-At each step:
-
-- predictions are computed  
-- accuracy is measured  
-- distributional properties evolve  
+```
+trained model → query set → partial evaluation
+```
 
 We control:
 
@@ -48,142 +67,103 @@ We control:
 
 ---
 
-## 3. Readout Scheduling
+## 3. Scheduling Strategies
 
-### 3.1 Random
-
-Uniform random selection; unbiased but unstructured.
-
-### 3.2 Modular Scheduling (mod30)
-
-Partition queries via:
-
-i → i mod M
-
-Provides deterministic structure and reproducibility.
-
-### 3.3 Confidence Scheduling
-
-Prioritize queries based on model uncertainty.
-
-### 3.4 Hybrid Scheduling
-
-Combine modular structure + confidence:
-
-- partition into lanes  
-- sort within lanes  
-- interleave  
+- random  
+- modular (mod30 lanes)  
+- confidence-aware  
+- hybrid (lanes + confidence)  
 
 ---
 
-## 4. Early Stopping and Coverage
+## 4. Stopping and Coverage
 
-### Accuracy-only stopping
-
-Stop when:
-
-accuracy ≥ threshold
-
-### Coverage
-
-Coverage = fraction of modular lanes visited
-
-### Coverage-constrained stopping
-
-Stop when:
-
-accuracy ≥ threshold AND coverage ≥ threshold
+- accuracy-only stopping  
+- coverage metric (lane coverage)  
+- joint stopping rule  
 
 ---
 
-## 5. Experiments
+## 5. Empirical Results
 
-### 5.1 Accuracy vs Coverage
+### Accuracy vs Coverage
 
-![Accuracy vs Coverage](../notebooks/12_notebook_outputs/figure_12b_accuracy_vs_lane_coverage.svg)
+![Accuracy vs Coverage](notebooks/12_notebook_outputs/figure_12b_accuracy_vs_lane_coverage.png)
 
-Accuracy rises quickly and saturates before coverage completes.
-
----
-
-### 5.2 Hybrid Scheduling Coverage
-
-![Lane Coverage](../notebooks/11_notebook_outputs/figure_11c_lane_coverage.svg)
-
-Hybrid scheduling improves structured coverage across lanes.
+Accuracy saturates before full coverage.
 
 ---
 
-### 5.3 Pareto Frontier
+### Hybrid Coverage
 
-![Pareto Frontier](../notebooks/13_notebook_outputs/figure_13c_pareto_coverage_view.svg)
+![Lane Coverage](notebooks/11_notebook_outputs/figure_11c_lane_coverage.png)
 
-Pareto-efficient policies reveal tradeoffs between query cost, accuracy, and coverage.
+Hybrid scheduling preserves structured coverage.
 
 ---
 
-## 6. Multi-Objective Policy Design
+### Pareto Frontier
 
-We define costs:
+![Pareto](notebooks/13_notebook_outputs/figure_13c_pareto_coverage_view.png)
 
-- query fraction  
+Tradeoffs between cost, accuracy, and coverage.
+
+---
+
+## 6. Multi-Objective Policy
+
+We optimize:
+
+- query cost  
 - accuracy gap  
 - coverage gap  
-- class distribution shift  
-
-We optimize weighted combinations and identify Pareto-efficient policies.
+- distribution shift  
 
 ---
 
-## 7. Results
-
-Key observations:
+## 7. Key Results
 
 - accuracy saturates early  
-- coverage requires additional queries  
+- coverage requires more queries  
 - hybrid strategies balance tradeoffs  
-- no universal best policy exists  
+- no single best policy  
 
 ---
 
-## 8. Discussion
+## 8. Interpretation
 
-This reframes inference as a policy design problem.
+Readout becomes a **policy design problem**:
 
-Key implications:
-
-- evaluation can be structured  
-- stopping requires explicit criteria  
-- tradeoffs are unavoidable  
+- structured evaluation  
+- explicit stopping  
+- measurable tradeoffs  
 
 ---
 
 ## 9. Relation to QOS
 
-This framework is compatible with QOS:
+Compatible with:
 
-input → model → structured readout
+```
+input → model → readout policy
+```
 
-No modification to QOS internals is required.
-
----
-
-## 10. Limitations
-
-- dataset-dependent behavior  
-- simple modular structure  
-- confidence approximations  
+No QOS modification required.
 
 ---
 
-## 11. Conclusion
+## 10. Conclusion
 
-We introduced:
+This work introduces:
 
-- structured scheduling  
+- structured readout scheduling  
 - coverage-aware stopping  
 - multi-objective policy design  
 
-This enables controlled inference in sparse evaluation settings.
-
 ---
+
+## Guardrail
+
+- no quantum advantage claims  
+- no QOS modification claims  
+- no accuracy improvement claims  
