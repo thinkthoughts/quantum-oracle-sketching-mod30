@@ -161,9 +161,3 @@ This work introduces:
 - multi-objective policy design  
 
 ---
-
-## Guardrail
-
-- no quantum advantage claims  
-- no QOS modification claims  
-- no accuracy improvement claims  
