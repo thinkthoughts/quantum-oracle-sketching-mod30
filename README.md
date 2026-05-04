@@ -185,7 +185,7 @@ If you find this repository useful, please consider citing our paper.
 ```
 ## Optional: Wheel-Based Pre-Oracle Filtering + Readout Policy
 
-This fork adds a classical preprocessing and inference-control layer around Quantum Oracle Sketching (QOS).
+This (quantum-oracle-sketching-mod30) fork adds a classical preprocessing and inference-control layer around Quantum Oracle Sketching (QOS).
 
 The additions are non-invasive and operate entirely outside the core QOS implementation.
 
