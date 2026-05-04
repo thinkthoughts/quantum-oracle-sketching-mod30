@@ -1,6 +1,6 @@
 # Wheel Pre-Oracle Filter Additions
 
-These files add an optional deterministic pre-oracle filtering layer before Quantum Oracle Sketching (QOS).
+These files add an optional deterministic pre-oracle filtering layer before Quantum Oracle Sketching (QOS), along with a complementary readout-side evaluation framework.
 
 ---
 
@@ -12,7 +12,17 @@ raw classical candidates
     -> filtered candidates
     -> qos.py or qos_sampling.py
     -> qsvt.py / downstream task
+    -> structured readout scheduling (Notebooks 08–13)
 ```
+
+This system now includes:
+
+- input-side filtering (Part I)  
+- output-side readout control (Part II)  
+
+---
+
+## Part I — Pre-Oracle Filtering (Input Reduction)
 
 This layer is:
 
@@ -63,9 +73,11 @@ pytest test_modwheel.py
 
 For full experiments, figures, and paper-ready results, see:
 
-👉 [notebooks/README.md](notebooks/modwheel_notebooks_overview.md)
+👉 notebooks/modwheel_notebooks_overview.md
 
-Includes:
+---
+
+### Part I — Pre-Oracle Filtering (01–07)
 
 - Notebook 01 — wheel density and tradeoff  
 - Notebook 02 — synthetic row-ID adapter  
@@ -75,11 +87,34 @@ Includes:
 - Notebook 06 — QOS-style wrapper (pre-feature filtering)  
 - Notebook 07 — row-order robustness  
 
-Together these establish:
+**Establishes:**
 
-- deterministic reduction ≈ random subsampling behavior  
+- deterministic reduction ≈ random subsampling  
 - reduced preprocessing cost (Notebook 06)  
 - stability under dataset reordering (Notebook 07)  
+
+---
+
+### Part II — Readout Scheduling & Inference Control (08–13)
+
+- Notebook 08 — structured vs random readout scheduling  
+- Notebook 09 — early stopping  
+- Notebook 10 — confidence-aware scheduling  
+- Notebook 11 — hybrid scheduling (mod30 + confidence)  
+- Notebook 12 — coverage-constrained stopping  
+- Notebook 13 — multi-objective policy optimization  
+
+**Establishes:**
+
+- structured evaluation of sparse queries  
+- early stopping based on target behavior  
+- coverage-aware scheduling (mod30 lanes)  
+- explicit stopping policies (accuracy + coverage)  
+- Pareto tradeoffs between:
+  - query cost  
+  - accuracy  
+  - coverage  
+  - distribution stability  
 
 ---
 
@@ -87,7 +122,7 @@ Together these establish:
 
 Full write-up of the modwheel pre-oracle filtering layer:
 
-👉 [paper/paper.pdf](paper/paper.pdf)
+👉 paper/paper.pdf
 
 Highlights:
 
@@ -97,40 +132,53 @@ Highlights:
 - robustness to dataset ordering  
 - non-invasive integration (no QOS modifications)  
 
-This work positions modwheel filtering as a:
+Extended results (Notebooks 08–13) introduce:
 
-> deterministic front-end layer for reducing classical input in QOS-style pipelines
+- structured readout scheduling  
+- coverage-aware inference  
+- multi-objective policy selection  
 
 ---
 
 ## Summary
 
-Across mod30, mod210, and mod2310:
+This repository introduces two complementary layers:
 
-- candidate streams reduce by ~73–79%  
-- behavior matches random subsampling at equal size  
-- preprocessing cost decreases when filtering is applied before feature construction  
-- results remain stable under dataset reordering  
+### Input-side (Part I)
 
-This supports:
+deterministic pre-oracle filtering  
+    -> reduced input stream  
+    -> lower preprocessing cost  
+
+### Output-side (Part II)
+
+structured readout scheduling  
+    -> controlled evaluation of sparse queries  
+    -> early stopping + coverage constraints  
+    -> policy selection via multi-objective optimization  
+
+---
+
+## Combined View
 
 ```text
-deterministic pre-oracle filtering
-    -> reduced input stream
-    -> lower preprocessing cost
-    -> stable downstream QOS / ML workflow
+raw data
+    -> modwheel filtering (input reduction)
+    -> feature construction / QOS-style model
+    -> structured readout scheduling
+    -> controlled stopping / policy selection
 ```
 
 ---
 
 ## Guardrail
 
-This layer:
+This work:
 
-- evaluates classical preprocessing behavior  
-- demonstrates QOS-compatible adapter integration  
+- evaluates classical preprocessing and inference behavior  
+- demonstrates QOS-compatible integration patterns  
 
-It does **not** claim:
+It does NOT claim:
 
 - quantum advantage  
 - improvements to QOS algorithms  
