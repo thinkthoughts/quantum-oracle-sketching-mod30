@@ -187,11 +187,3 @@ We introduced:
 This enables controlled inference in sparse evaluation settings.
 
 ---
-
-## Guardrail
-
-This work does NOT claim:
-
-- quantum advantage  
-- improvements to QOS  
-- accuracy gains  
