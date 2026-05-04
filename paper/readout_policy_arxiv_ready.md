@@ -137,7 +137,7 @@ This enforces both predictive performance and structural completeness.
 
 ### 5.1 Accuracy vs Coverage
 
-![Accuracy vs Coverage](notebooks/12_notebook_outputs/figure_12b_accuracy_vs_lane_coverage.png)
+![Accuracy vs Coverage](../notebooks/12_notebook_outputs/figure_12b_accuracy_vs_lane_coverage.svg)
 
 Accuracy saturates before coverage completes.
 
@@ -145,7 +145,7 @@ Accuracy saturates before coverage completes.
 
 ### 5.2 Hybrid Scheduling Coverage
 
-![Lane Coverage](notebooks/11_notebook_outputs/figure_11c_lane_coverage.png)
+![Lane Coverage](../notebooks/11_notebook_outputs/figure_11c_lane_coverage.svg)
 
 Hybrid scheduling improves structured coverage.
 
@@ -153,7 +153,7 @@ Hybrid scheduling improves structured coverage.
 
 ### 5.3 Pareto Frontier
 
-![Pareto Frontier](notebooks/13_notebook_outputs/figure_13c_pareto_coverage_view.png)
+![Pareto Frontier](../notebooks/13_notebook_outputs/figure_13c_pareto_coverage_view.svg)
 
 Pareto-efficient policies reveal tradeoffs between cost, accuracy, and coverage.
 
@@ -242,13 +242,3 @@ This enables controlled inference in sparse evaluation settings.
 [3] Elkan, C. (2001). *The Foundations of Cost-Sensitive Learning*. IJCAI.
 
 ---
-
-## Guardrail
-
-This work does **not** claim:
-
-- quantum advantage,
-- improvements to QOS algorithms,
-- accuracy gains.
-
-It studies classical inference control compatible with QOS-style workflows.
